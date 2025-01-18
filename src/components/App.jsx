@@ -17,9 +17,8 @@ export default class App extends React.Component {
       "thread_id": 1,
       "title": "About Me",
       "messages": [
-        { id: 1, text: 'Tommy Ho is a software engineer with 5+ years of experience in both large enterprises and startups, alongside 2+ years in tech sales. He has a unique blend of both engineering and sales experience. This is a result of his time at startups where he wore multiple hats taking on the role of both Software Engineer and Technical Sales AE.' },
-        { id: 2, text: 'He is passionate about blockchain and AI, and is a founding member of Nodies, a blockchain SaaS startup offering nodes as a service, and Function Network, a blockchain and AI SaaS startup focused on inference.' },
-        { id: 3, text: 'He currently lives in Houston, TX but loves to travel both for leisure and work. When he is not working, he enjoys playing pickleball, powerlifting, and exploring parks with his dog.' }
+        { id: 1, text: 'He is passionate about blockchain and AI, and is a founding member of Nodies, a blockchain SaaS startup offering nodes as a service, and Function Network, a blockchain and AI SaaS startup focused on inference.' },
+        { id: 2, text: 'He currently lives in Houston, TX but loves to travel both for leisure and work. When he is not working, he enjoys playing pickleball, powerlifting, and exploring parks with his dog.' }
       ]
     };
 
