@@ -1,4 +1,4 @@
-import NavbarThreadButton from './NavbarThreadButton'
+import NavbarThreadButton from './NavbarThreadButton.jsx'
 
 export default function Navbar(props){
   function getThreadButtons(){
