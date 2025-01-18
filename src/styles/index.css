@@ -54,18 +54,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
 .sidebar {
   width: 260px;
@@ -113,8 +101,8 @@ button:focus-visible {
   cursor: pointer;
   border-radius: 6px;
   transition: background-color 0.2s, transform 0.2s;
-  background-color: transparent; /* Ensure the background is transparent */
-  border: none; /* Remove default button border */
+  background-color: transparent; 
+  border: none; 
 }
 
 .chat-item:hover {
@@ -254,5 +242,3 @@ button:focus-visible {
   padding-top: 50px;
   
 }
-
-
