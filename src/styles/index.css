@@ -190,31 +190,63 @@ button:focus-visible {
   font-size: 12px;
   padding-top: 12px;
 }
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  display: flex;
+  flex-direction: column; /* Stack input container and footer vertically */
+  align-items: flex-start;
+  padding: 10px;
+}
 
 .chat-input-container {
-  position: fixed;
-  bottom: 20px; /* Adjust as needed */
-  padding: 10px 30px; /* Padding around the container */
-  left: 50%;
-  transform: translateX(-50%); /* Centers the container horizontally */
-  background-color: #2d2d2d; /* Dark background */
-  border-radius: 30px; /* Rounded edges */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Subtle shadow */
-  width: 50%; /* Adjust width of the container */
-  height: 10%;
   display: flex;
-  flex-direction: column; /* Ensure the input and container grow vertically */
-  justify-content: flex-start; /* Align input to the start (left) */
-  align-items: flex-start; /* Align input to the top of the container */
-  transition: height 0.2s ease; /* Smooth transition for height change */
+  justify-content: center;
+  padding: 10px 30px;
+  background-color: #2d2d2d;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  width: 100%; /* Ensure it takes up full width of the parent */
+  height: 10%;
+}
+.chat-input-container form {
+  display: flex;
+  width: 100%; /* Ensure the form takes up full width */
+}
+
+.chat-input-container button:disabled {
+  cursor: not-allowed; /* Disable the cursor when button is disabled */
+}
+
+.chat-footer {
+  width: 100%; /* Make the footer take the full width of the parent */
+  margin-top: 10px; /* Add some space between input and footer */
 }
 
 .chat-input-container p {
-  color: #888; /* Light gray color */
-  font-style: italic; /* Italicized text */
-  font-size: 14px; /* Adjust font size as needed */
-  opacity: 0.5; /* Slightly faded appearance */
+  display: flex;
+  color: #888;
+  font-style: italic;
+  font-size: 14px;
+  opacity: 0.5;
 }
+
+.chat-input-container #chat_input{
+  flex-grow: 1; /* Make the textarea take up the remaining space */
+  width: 100%;
+  resize: none;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.chat-input-container #chat_submit{
+  display: flex; /* Ensure the button is aligned horizontally */
+}
+
 
 .message-container {
   display: flex;

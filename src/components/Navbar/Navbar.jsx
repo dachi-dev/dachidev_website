@@ -1,10 +1,17 @@
 import NavbarThreadButton from './NavbarThreadButton.jsx'
 
 export default function Navbar(props){
-  function getThreadButtons(){
-    return  props.chatTitles.map((titleDict) => {
-      return <NavbarThreadButton title={titleDict.title} key={titleDict.id} id={titleDict.id} onClick={props.setCurrentThreadId}/>
-    })
+  function getThreadButtons() {
+    return props.chatTitles.map((titleDict) => {
+      return (
+        <NavbarThreadButton
+          title={titleDict.title}
+          key={titleDict.id}
+          id={titleDict.id}  // Pass the thread id
+          onClick={props.setCurrentThreadId}  // Pass the setCurrentThreadId function to change the thread
+        />
+      );
+    });
   }
     return (
         <nav className={`sidebar`}>
