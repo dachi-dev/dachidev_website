@@ -13,22 +13,25 @@ const App = () => {
     1: {
       title: "About Me",
       messages: [
-        { id: 1, text: 'He is passionate about blockchain and AI...', isAI: true },
-        { id: 2, text: 'He currently lives in Houston, TX...', isAI: true }
+        { id: 1, text: 'Give me a overview of Tommy. Tell me who he is.', isAI: false},
+        { id: 2, text: 'Tommy is a software engineer and technical account executive with 6 years of experience. He is particularly passionate about blockchain and AI', isAI: true },
+        { id: 3, text: 'He currently lives in Houston, TX. Some of his hobbies include powerlifting, pickleball, cafe-hopping, and traveling.', isAI: true }
       ]
     },
     2: {
       title: "Resume",
       messages: [
-        { id: 1, text: "Tommy has a unique blend of both engineering and sales experience...", isAI: true },
-        { id: 2, text: "He has been a Software Engineer since 2018...", isAI: true }
+        { id: 1, text: 'Can you highlight his resume?', isAI: false},
+        { id: 2, text: "Tommy has a unique blend of both engineering and sales experience. This is a result of working in both enterprise and startups where he had to wear multiple. Most notably he has engineering experience at companies such as AWS,CGI, and Nodies.app since 2018. Additionally, he has direct sales experience since 2023 as a Technical Account Executive at Nodies.app and Function.network.", isAI: true },
+        { id: 3, text: 'Where can I view his full resume?', isAI: false},
+        { id: 4, text: 'Get in contact with him at TommyHoJobs@gmail.com', isAI: true},
       ]
     },
     3: {
       title: "Website Info",
       messages: [
-        { id: 1, text: "This website was created using React.js...", isAI: true },
-        { id: 2, text: "The website is a work in progress...", isAI: true }
+        { id: 1, text: "What tech stack is this website using?", isAI: false},
+        { id: 2, text: "This website was developed by Tommy/Dachi using React.js and is running Meta's Llama Model. It is a WIP and is not currently responsive.", isAI: true },
       ]
     }
   });
