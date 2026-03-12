@@ -1,0 +1,160 @@
+import { useState, useRef, useCallback } from "react";
+import "./App.css";
+import ParticleBackground from "./components/ParticleBackground";
+import ChatMessage from "./components/ChatMessage";
+import ChatInput from "./components/ChatInput";
+import TypingIndicator from "./components/TypingIndicator";
+import { sendMessage } from "./api";
+
+const SUGGESTIONS = [
+  "Give me a quick summary of Tommy",
+  "Tell me about the AWS role",
+  "What sales engineering experience does Tommy have?",
+  "What's Tommy's education?",
+  "Let me see your resume",
+];
+
+export default function App() {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const chatAreaRef = useRef(null);
+
+  const handleSend = useCallback(
+    async (text) => {
+      setError("");
+      const userMsg = { role: "user", content: text };
+      const newMessages = [...messages, userMsg];
+      setMessages(newMessages);
+      setLoading(true);
+
+      try {
+        const reply = await sendMessage(newMessages);
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: reply },
+        ]);
+      } catch (err) {
+        setError(err.message || "Something went wrong. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [messages]
+  );
+
+  const handleSuggestion = (text) => {
+    if (!loading) handleSend(text);
+  };
+
+  const hasMessages = messages.length > 0;
+
+  return (
+    <>
+      {/* Ambient background */}
+      <div className="ambient-bg">
+        <div className="ambient-orb" />
+        <div className="ambient-orb" />
+        <div className="ambient-orb" />
+      </div>
+
+      <ParticleBackground />
+
+      <div className="app-container">
+        {/* Header */}
+        <header className="app-header">
+          <div className="header-badge">
+            <span className="pulse-dot" />
+            Sr. Sales Engineer &middot; 7+ Years Experience
+          </div>
+          <h1 className="header-title">
+            Ask <span className="highlight">Tommy</span> Anything
+          </h1>
+          <p className="header-subtitle">
+            Sr. Sales Engineer with 7+ years driving enterprise deals, technical GTM, and presales across AWS, DevSecOps, and developer tooling
+          </p>
+          <div className="header-links">
+            <a href="https://www.linkedin.com/in/tommy-ho-se/" target="_blank" rel="noopener noreferrer" className="header-link">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/dachi-dev" target="_blank" rel="noopener noreferrer" className="header-link">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+              GitHub
+            </a>
+            <a href="/Tommy_Ho_Resume.pdf" target="_blank" rel="noopener noreferrer" className="header-link resume-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Resume PDF
+            </a>
+          </div>
+        </header>
+
+        {/* Suggestion chips */}
+        {!hasMessages && (
+          <div className="suggestions">
+            {SUGGESTIONS.map((s) => (
+              <button
+                key={s}
+                className="suggestion-chip"
+                onClick={() => handleSuggestion(s)}
+                disabled={loading}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Chat area */}
+        {hasMessages ? (
+          <div className="chat-area" ref={chatAreaRef}>
+            {messages.map((msg, i) => (
+              <ChatMessage key={i} message={msg} />
+            ))}
+            {loading && <TypingIndicator />}
+            {error && <div className="error-toast">{error}</div>}
+          </div>
+        ) : (
+          <div className="welcome-container">
+            <div className="welcome-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <div className="welcome-text">
+              <h2>Start a conversation</h2>
+              <p>
+                Click a suggestion above or type your own question below
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Input */}
+        <div className="chat-input-wrapper">
+          <ChatInput onSend={handleSend} disabled={loading} />
+          <p className="disclaimer">
+            Responses are AI-generated based on Tommy's resume and may not be fully accurate.
+            For job opportunities or the most accurate information, please contact{" "}
+            <a href="mailto:tommyhojobs@gmail.com">tommyhojobs@gmail.com</a>.
+          </p>
+        </div>
+      </div>
+    </>
+  );
+}
