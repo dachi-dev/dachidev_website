@@ -5,6 +5,7 @@ import ChatMessage from "./components/ChatMessage";
 import ChatInput from "./components/ChatInput";
 import TypingIndicator from "./components/TypingIndicator";
 import { sendMessage } from "./api";
+import LogoMarquee from "./components/LogoMarquee";
 
 const SUGGESTIONS = [
   "Give me a quick summary of Tommy",
@@ -99,19 +100,24 @@ export default function App() {
           </div>
         </header>
 
-        {/* Suggestion chips */}
+        {/* Company logos */}
+        {!hasMessages && <LogoMarquee />}
+
+        {/* Suggestion chips — auto-scrolling */}
         {!hasMessages && (
-          <div className="suggestions">
-            {SUGGESTIONS.map((s) => (
-              <button
-                key={s}
-                className="suggestion-chip"
-                onClick={() => handleSuggestion(s)}
-                disabled={loading}
-              >
-                {s}
-              </button>
-            ))}
+          <div className="suggestions-marquee">
+            <div className="suggestions-track">
+              {[...SUGGESTIONS, ...SUGGESTIONS].map((s, i) => (
+                <button
+                  key={i}
+                  className="suggestion-chip"
+                  onClick={() => handleSuggestion(s)}
+                  disabled={loading}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
