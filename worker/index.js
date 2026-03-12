@@ -63,6 +63,8 @@ ${RESUME_DATA}`;
 
 const ALLOWED_ORIGINS = [
   "https://dachi-dev.github.io",
+  "https://dachi.dev",
+  "https://www.dachi.dev",
   "http://localhost:5173",
   "http://localhost:4173",
 ];
